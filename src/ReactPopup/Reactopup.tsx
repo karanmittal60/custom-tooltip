@@ -1,33 +1,29 @@
 import React, {Component, useState} from 'react';
 import Popup from 'reactjs-popup';
 
-const Tooltip = () => {
-    const [show, setShow] = useState<any>(false)
-    console.log("show==>", show);
+const Tooltip = (props: any) => {
+    // const [show, setShow] = useState<any>(props.show)
+    console.log("show==>", props.show);
     return(
         <>
             <Popup
                 trigger={open => (
-
-                    <button className="button">
-                        {setShow(open)}
-                        Trigger - {open ? "Opened" : "Closed"}
-                    </button>
+                    <i className="fa fa-info-circle" aria-hidden="true">
+                            {props.showTooltip}.
+                        </i>
                 )}
-                open={show}
+                open={props.show}
                 closeOnEscape={true}
                 position="top center"
-                closeOnDocumentClick
+                closeOnDocumentClick={true}
                 keepTooltipInside={false}
                 modal={false}
-                onClose={() => setShow(false)}
+                onClose={props.hideTooltip}
             >
                 <>
                     <span>
                         Popup content
-                        Popup content
-                        Popup content
-                    <button onClick={()=> setShow(false)}>x</button>
+                        <i className="fas fa-times" onClick={props.hideTooltip}></i>
                     </span>
                 </>
             </Popup>
@@ -36,17 +32,10 @@ const Tooltip = () => {
 };
 
 
-function Reactopup () {
-
-    const [show, setShow] = useState<any>(false)
-    const closeModal = () => {
-        setShow(false)
-    };
-    console.log("show==>",show);
+function Reactopup (props: any) {
     return (
         <div>
-            <button onClick={closeModal}>hel</button>
-            <Tooltip/>
+            <Tooltip {...props}/>
         </div>
     );
 }
